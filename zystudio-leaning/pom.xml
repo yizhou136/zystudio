@@ -20,7 +20,9 @@
     <modules>
         <module>jersey-service</module>
         <module>jersey-springboot</module>
+        <!--
         <module>spring-data-examples</module>
+        -->
         <module>common-java</module>
     </modules>
     <!--
