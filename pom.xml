@@ -120,14 +120,43 @@
         </dependency>
     </dependencies>
 
+
 	<build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.ver}</version>
+                    <configuration>
+                        <layout>ZIP</layout>
+                        <excludeGroupIds>
+                            org.springframework.cloud,org.springframework.boot,ch.qos.logback,org.slf4j,org.yaml,org.springframework.security,org.bouncycastle
+                            ,org.springframework,com.fasterxml.jackson.core,org.apache.tomcat.embed,org.hibernate,javax.validation,org.jboss.logging,
+                            com.fasterxml,org.freemarker,com.netflix.eureka,org.codehaus.jettison,stax,com.netflix.netflix-commons,
+                            commons-jxpath,joda-time,org.antlr,antlr,
+                            com.google.code.gson,org.apache.commons,javax.ws.rs,com.netflix.servo,
+                            com.netflix.servo,com.sun.jersey,com.sun.jersey.contribs,
+                            org.apache.httpcomponents,commons-codec,com.google.inject,aopalliance,
+                            com.sun.jersey,
+                            com.netflix.eureka,org.codehaus.woodstox,javax.xml.stream,com.netflix.archaius,com.google.code.findbugs,javax.inject,
+                            com.fasterxml.jackson.dataformat,com.fasterxml.jackson.module,org.codehaus.woodstox,
+                            com.fasterxml.woodstox,com.thoughtworks.xstream,xmlpull,xpp3,commons-configuration,commons-lang,com.google.guava,com.netflix.ribbon,
+                            io.reactivex,com.netflix.hystrix,org.hdrhistogram,io.netty,
+                            commons-collections,com.netflix.netflix-commons,org.slf4j,org.springframework.boot,junit,
+                            org.hamcrest,com.jayway.jsonpath,net.minidev,org.ow2.asm,org.assertj,
+                            org.mockito,org.objenesis,org.skyscreamer,com.vaadin.external.google
+                        </excludeGroupIds>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 		<plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <!--
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -137,6 +166,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            -->
 		</plugins>
 	</build>
 </project>
