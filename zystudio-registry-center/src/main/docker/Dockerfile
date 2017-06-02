@@ -1,4 +1,8 @@
-FROM  registry.cn-qingdao.aliyuncs.com/zystudio/micro_services:registry_center_dep_0.0.1
+#FROM  registry.cn-qingdao.aliyuncs.com/zystudio/micro_services:registry_center_dep_0.0.1
+
+ARG FROM_DEP="my.docker.registry.com:5000/micro_services/registry_center_dep" 
+FROM ${FROM_DEP}
+
 VOLUME /tmp
 COPY target/*.jar app.jar
 
