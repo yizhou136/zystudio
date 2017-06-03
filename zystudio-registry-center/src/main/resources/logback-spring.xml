@@ -5,6 +5,11 @@
         <appender-ref ref="CONSOLE"/>
     </logger>
 
+
+    <logger name="org.springframework.boot" level="ERROR" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
     <logger name="com.netflix" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
     </logger>
