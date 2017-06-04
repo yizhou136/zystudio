@@ -6,8 +6,18 @@ FROM ${FROM_DEP}
 VOLUME /tmp
 COPY target/*.jar app.jar
 
+COPY src/main/docker/enterpoint.sh  enterpoint.sh
+
 
 RUN sh -c 'touch /app.jar'
+#RUN sh -c 'touch /enterpoint.sh'
+
+RUN sh -c 'chmod +x /enterpoint.sh'
 
 RUN echo $(date) > /image_built_at
-ENTRYPOINT ["java","-Dloader.path=/dependency","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar","--spring.profiles.active=${SPRING_PROFILES_ACTIVE}"]
+
+USER root
+
+#CMD ["sudo","sh","-c","/enterpoint.sh"]
+CMD /enterpoint.sh
+#ENTRYPOINT ["java","-Dloader.path=/dependency","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]

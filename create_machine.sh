@@ -14,6 +14,7 @@ SH_SERVICE_LABELS="--engine-label os=boot2docker --engine-label type=service --e
 
 MANAGER_NAME=manager1
 docker-machine  create ${BASE_PROP} ${MANAGER_LABELS}  ${MANAGER_NAME}
+docker-machine ssh ${MANAGER_NAME}  docker swarm init  --advertise-addr  eth1
 
 
 MANAGER_IP=`docker-machine  ssh  ${MANAGER_NAME}  ifconfig eth1 |awk -F '[ :]+' 'NR==2 {print $4}' `
