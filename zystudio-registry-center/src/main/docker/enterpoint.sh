@@ -21,7 +21,7 @@ if [ "${ZONE}" = "bj" ]; then
         PROFILE="bj_yw_${SLOT}"
     fi
 else 
-  PROFILE="sh_${SLOT}"
+  PROFILE="${ZONE}"
 fi
 
 echo "show spring.profiles.active:${PROFILE} and run app.jar"
