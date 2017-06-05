@@ -10,9 +10,15 @@ PROJECT="regcen"
 
 
 ZONE="bjyw1"
-NAME="${PROJECT}_${ZONE}"
-docker-machine ssh manager1 docker  service  create  --replicas 1 --network ${NETWORK} --label service_name=${NAME} --hostname=${NAME}  --env zone=${ZONE} --env slot="{{.Task.Slot}}" --constraint engine.labels.location==${ZONE} --constraint engine.labels.type==common --name ${NAME}  ${IMAGE}
+NAME="${PROJECT}-${ZONE}"
+#SET_ENV='--env zone=${ZONE} --env slot="{{.Task.Slot}}" --env registry.peers=""  --env registry.hostname="{NAME}"'
+SET_ENV='--env zone=${ZONE} --env slot="{{.Task.Slot}}"  --env registry.hostname="${NAME}"'
+SET_CONSTRAINT='--constraint engine.labels.location==${ZONE} --constraint engine.labels.type==common'
+docker-machine ssh manager1 docker  service  create  --replicas 1 --network ${NETWORK} --label service_name=${NAME} --hostname=${NAME}  ${SET_ENV} ${SET_CONSTRAINT} --name ${NAME}  ${IMAGE}
 
 ZONE="bjdx1"
-NAME="${PROJECT}_${ZONE}"
-docker-machine ssh manager1 docker  service  create  --replicas 1 --network ${NETWORK} --label service_name=${NAME} --hostname=${NAME}  --env zone=${ZONE} --env slot="{{.Task.Slot}}" --constraint engine.labels.location==${ZONE} --constraint engine.labels.type==common --name ${NAME}  ${IMAGE}
+NAME="${PROJECT}-${ZONE}"
+#SET_ENV='--env zone=${ZONE} --env slot="{{.Task.Slot}}" --env registry.peers=""  --env registry.hostname="{NAME}"'
+SET_ENV='--env zone=${ZONE} --env slot="{{.Task.Slot}}" --env registry.hostname="{NAME}"'
+SET_CONSTRAINT='--constraint engine.labels.location==${ZONE} --constraint engine.labels.type==common'
+docker-machine ssh manager1 docker  service  create  --replicas 1 --network ${NETWORK} --label service_name=${NAME} --hostname=${NAME}  ${SET_ENV} ${SET_CONSTRAINT} --name ${NAME}  ${IMAGE}
