@@ -26,15 +26,21 @@ echo "the ${MANAGER_NAME} ip: ${MANAGER_IP} SWARM_TOKEN:${MANAGER_SWARM_TOKEN} \
 
 
 WORK_NAME=bjcommon1
-docker-machine  create ${BASE_PROP} ${BJ_COMMON_LABELS} ${WORK_NAME}
+docker-machine  create ${BASE_PROP} ${BJ_COMMON_LABELS}_dx_1 ${WORK_NAME}
+echo "${WORK_NAME} join swarm ${MANAGER_NAME} ip: ${MANAGER_IP}"
+docker-machine  ssh  ${WORK_NAME} ${SWARM_JOIN_CMD} 
+
+WORK_NAME=bjcommon2
+docker-machine  create ${BASE_PROP} ${BJ_COMMON_LABELS}_yw_1 ${WORK_NAME}
 echo "${WORK_NAME} join swarm ${MANAGER_NAME} ip: ${MANAGER_IP}"
 docker-machine  ssh  ${WORK_NAME} ${SWARM_JOIN_CMD} 
 
 
-WORK_NAME=shcommon1
-docker-machine  create ${BASE_PROP} ${SH_COMMON_LABELS} ${WORK_NAME}
-echo "${WORK_NAME} join swarm ${MANAGER_NAME} ip: ${MANAGER_IP}"
-docker-machine  ssh  ${WORK_NAME} ${SWARM_JOIN_CMD} 
+
+#WORK_NAME=shcommon1
+#docker-machine  create ${BASE_PROP} ${SH_COMMON_LABELS} ${WORK_NAME}
+#echo "${WORK_NAME} join swarm ${MANAGER_NAME} ip: ${MANAGER_IP}"
+#docker-machine  ssh  ${WORK_NAME} ${SWARM_JOIN_CMD} 
 
 
 
