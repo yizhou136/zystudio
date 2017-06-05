@@ -16,9 +16,9 @@ echo "the zone:$ZONE slot:$SLOT"
 
 if [ "${ZONE}" = "bj" ]; then
     if [ ${SLOT} = 1 ] ; then
-        PROFILE="bj_yw_${SLOT}"
-    else
         PROFILE="bj_dx_${SLOT}"
+    else
+        PROFILE="bj_yw_${SLOT}"
     fi
 else 
   PROFILE="sh_${SLOT}"
