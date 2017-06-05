@@ -15,5 +15,13 @@
 	<description>the ${project.artifactId} of Spring Cloud project</description>
 
 	<dependencies>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
 	</dependencies>
 </project>

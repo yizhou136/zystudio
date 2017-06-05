@@ -5,6 +5,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.netflix.hystrix.contrib.javanica.conf.HystrixPropertiesManager;
 import com.zy.weibo.beans.User;
 import com.zy.weibo.bootconfig.mvc.KryoHttpMessageConverter;
+import feign.RequestLine;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,4 +33,9 @@ public interface WeiboServiceClient {
                     //@HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_STRATEGY,value = "SEMAPHORE"),
                     @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS,value = "5000")})
     User regUser(User user);
+
+
+    @RequestMapping(value = "/mywebsocket")
+    //@RequestLine("")
+    void mywebsocket();
 }

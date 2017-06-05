@@ -11,12 +11,21 @@ import com.netflix.hystrix.contrib.javanica.command.ExecutionType;
 import com.netflix.hystrix.contrib.javanica.command.MetaHolder;
 import com.netflix.hystrix.contrib.javanica.conf.HystrixPropertiesManager;
 import com.netflix.hystrix.contrib.javanica.utils.AopUtils;
+import feign.Client;
 import feign.Feign;
 import feign.Logger;
 import feign.Target;
 import feign.hystrix.SetterFactory;
+import feign.okhttp.OkHttpClient;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cloud.netflix.feign.ribbon.CachingSpringLoadBalancerFactory;
+import org.springframework.cloud.netflix.feign.ribbon.LoadBalancerFeignClient;
+import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -102,5 +111,27 @@ public class FeignConfiguration {
             }
         }
         return builder;
+    }
+
+
+    @Configuration
+    @ConditionalOnClass(OkHttpClient.class)
+    protected static class OkHttpFeignLoadBalancedConfiguration {
+        @Autowired(required = false)
+        private okhttp3.OkHttpClient okHttpClient;
+
+        @Bean
+        @ConditionalOnMissingBean(Client.class)
+        public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory,
+                                  SpringClientFactory clientFactory) {
+            WebSocketOkHttpClient delegate;
+            if (this.okHttpClient != null) {
+                delegate = new WebSocketOkHttpClient(this.okHttpClient);
+            }
+            else {
+                delegate = new WebSocketOkHttpClient();
+            }
+            return new LoadBalancerFeignClient(delegate, cachingFactory, clientFactory);
+        }
     }
 }

@@ -56,4 +56,10 @@ public class ConsumerController {
         logger.info("regedUser user:{}", regedUser);
         return regedUser;
     }
+
+    @RequestMapping(value = "/startws")
+    public String startWebSocket(){
+        weiboServiceClient.mywebsocket();
+        return "ok";
+    }
 }

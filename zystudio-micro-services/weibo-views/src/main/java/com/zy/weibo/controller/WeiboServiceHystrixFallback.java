@@ -27,4 +27,9 @@ public class WeiboServiceHystrixFallback implements WeiboServiceClient{
                  user);
         return null;
     }
+
+    @Override
+    public void mywebsocket() {
+        logger.info("by WeiboServiceHystrixFallback mywebsocket");
+    }
 }
