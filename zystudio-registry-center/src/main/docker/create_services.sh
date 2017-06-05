@@ -10,9 +10,9 @@ PROJECT="regcen"
 
 
 ZONE="bjyw1"
-NAME="${ZONE}.${PROJECT}.zystudio.com"
+NAME="${PROJECT}_${ZONE}"
 docker-machine ssh manager1 docker  service  create  --replicas 1 --network ${NETWORK} --label service_name=${NAME} --hostname=${NAME}  --env zone=${ZONE} --env slot="{{.Task.Slot}}" --constraint engine.labels.location==${ZONE} --constraint engine.labels.type==common --name ${NAME}  ${IMAGE}
 
 ZONE="bjdx1"
-NAME="${ZONE}.${PROJECT}.zystudio.com"
+NAME="${PROJECT}_${ZONE}"
 docker-machine ssh manager1 docker  service  create  --replicas 1 --network ${NETWORK} --label service_name=${NAME} --hostname=${NAME}  --env zone=${ZONE} --env slot="{{.Task.Slot}}" --constraint engine.labels.location==${ZONE} --constraint engine.labels.type==common --name ${NAME}  ${IMAGE}
