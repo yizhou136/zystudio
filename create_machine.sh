@@ -42,12 +42,4 @@ docker-machine  ssh  ${WORK_NAME} ${SWARM_JOIN_CMD}
 #echo "${WORK_NAME} join swarm ${MANAGER_NAME} ip: ${MANAGER_IP}"
 #docker-machine  ssh  ${WORK_NAME} ${SWARM_JOIN_CMD} 
 
-
-
-
-
-#docker-machine  create ${BASE_PROP} ${BJ_SERVICE_LABELS}  --swarm   bjservice1 
-
-
-#docker-machine  create ${BASE_PROP} ${SH_COMMON_LABELS}   --swarm   shcommon1 
-#docker-machine  create ${BASE_PROP} ${SH_SERVICE_LABELS}  --swarm   shservice1 
+docker swarm join --token ${MANAGER_SWARM_TOKEN} ${MANAGER_IP}:2377 
