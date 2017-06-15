@@ -27,7 +27,7 @@ public class KryoHttpMessageConverter extends AbstractHttpMessageConverter<Objec
 
     @Override
     protected boolean supports(Class<?> clazz) {
-        return true;
+        return false;
     }
 
     @Override

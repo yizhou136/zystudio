@@ -2,6 +2,9 @@ package com.zy.weibo.controller;
 
 import com.zy.weibo.beans.User;
 import com.zy.weibo.service.WeiboService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,19 +37,23 @@ public class ConsumerController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(Integer a, Integer b){
-        logger.info("add a:{}, b:{}  the env from str:{}",
+        logger.info("addServiceByRestTemplate a:{}, b:{}  the env from str:{}",
                 a, b, from);
-        return weiboService.addServiceByFeign(a, b);
+        return weiboService.addServiceByRestTemplate(a, b);
     }
 
     @RequestMapping(value = "/add2", method = RequestMethod.GET)
-    public Integer add2(Integer a, Integer b){
+    public Integer add2(Integer a, Integer b, String access_token){
         logger.info("add2 by feign the env from str:{}",
                 from);
-        return weiboServiceClient.add(a, b);
+        return weiboServiceClient.add(a, b, access_token);
     }
 
 
+    @ApiOperation(value = "注册用户", notes = "desc")
+    @ApiImplicitParams(
+            @ApiImplicitParam(name = "user", value = "用户详细实体user", dataType = "User")
+    )
     @RequestMapping(value = "/regUser", method = RequestMethod.GET,
       produces = {"application/json"})
     public User regUser(User user){

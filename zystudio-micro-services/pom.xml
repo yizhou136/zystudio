@@ -28,5 +28,6 @@
         <module>video-views</module>
 
         <module>search-service</module>
+        <module>auth-server</module>
     </modules>
 </project>

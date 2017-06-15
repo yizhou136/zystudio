@@ -39,7 +39,7 @@ public class WeiboService {
     //@HystrixCollapser()
     public String addServiceByFeign(Integer a, Integer b){
         logger.info("addServiceByFeign a:{}, b:{}", a, b);
-        Integer integer = weiboServiceClient.add(a, b);
+        Integer integer = weiboServiceClient.add(a, b, "null");
         return String.valueOf(integer);
     }
 

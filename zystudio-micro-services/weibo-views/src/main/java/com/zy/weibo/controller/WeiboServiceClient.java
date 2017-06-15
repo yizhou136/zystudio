@@ -22,7 +22,9 @@ public interface WeiboServiceClient {
                     //@HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_STRATEGY,value = "SEMAPHORE"),
                     @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS,value = "1000")})
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    Integer  add(@RequestParam("a")Integer a, @RequestParam("b") Integer b);
+    Integer  add(@RequestParam("a")Integer a
+            , @RequestParam("b") Integer b
+            , @RequestParam("access_token") String accessToken);
 
 
 
@@ -30,8 +32,8 @@ public interface WeiboServiceClient {
             method = RequestMethod.POST, consumes = "application/x-kryo")
     @HystrixCommand(commandProperties =
             {
-                    //@HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_STRATEGY,value = "SEMAPHORE"),
-                    @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS,value = "5000")})
+            //@HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_STRATEGY,value = "SEMAPHORE"),
+            @HystrixProperty(name = HystrixPropertiesManager.EXECUTION_ISOLATION_THREAD_TIMEOUT_IN_MILLISECONDS,value = "5000")})
     User regUser(User user);
 
 

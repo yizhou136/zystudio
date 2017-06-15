@@ -14,9 +14,9 @@ public class WeiboServiceHystrixFallback implements WeiboServiceClient{
     private static final Logger logger = LoggerFactory.getLogger(WeiboServiceHystrixFallback.class);
 
     @Override
-    public Integer add(Integer a, Integer b) {
-        logger.info("by WeiboServiceHystrixFallback a:{}  b:{}",
-                a, b);
+    public Integer add(Integer a, Integer b, String accessToken) {
+        logger.info("by WeiboServiceHystrixFallback a:{}  b:{} accessToken:{}",
+                a, b, accessToken);
 
         return -1;
     }
