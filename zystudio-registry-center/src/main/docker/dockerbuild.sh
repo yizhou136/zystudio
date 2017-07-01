@@ -5,7 +5,7 @@ PWD=`pwd`
 set -e
 
 # Docker image prefix
-REGISTRY=my.docker.registry.com:5000/
+REGISTRY=reg.docker.zystudio.site:5000/
 #REPOSITORY=micro_services
 
 REPOSITORY=zystudio

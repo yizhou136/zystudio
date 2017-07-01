@@ -1,0 +1,17 @@
+version: '3'
+
+services: 
+    registry_center:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                buildno: 1
+
+        depends_on:  
+            - registry_center_dep
+
+    registry_center_dep:
+        build:
+            context: .
+            dockerfile: DockerfileDep
