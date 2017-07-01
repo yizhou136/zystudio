@@ -18,7 +18,7 @@ LOCATION=${location:"bj"}
 echo "create ${SERVICE_NAME} service for ${IMG_PREF}"
 
 SET_COMMS="--publish 80:80 --replicas 2 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname="{{.Task.Name}}" --name ${NAME}"
-SET_ENV="--env location=${LOCATION} --env slot=\"{{.Task.Slot}}\" "
+SET_ENV="--env service=${SERVICE_NAME} --env location=${LOCATION} --env slot=\"{{.Task.Slot}}\" "
 SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint engine.labels.service.type==common"
 
 

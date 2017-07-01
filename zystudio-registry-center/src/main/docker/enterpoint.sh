@@ -1,29 +1,19 @@
 #/bin/bash
-
-
 env
 cat /etc/hostname
 
-
-#PROFILE=`$(spring.profiles.active)`
-
-PROJECT="regcen"
-ZONE="$zone"
+SERVICE="$service"
+LOCATION="$location"
 SLOT="$slot"
+PROFILE="$profile"
 
-echo "the zone:$ZONE slot:$SLOT"
-
-
-if [ "${ZONE}" = "bj" ]; then
+if [ "${LOCATION}" = "bj" ]; then
     if [ ${SLOT} = 1 ] ; then
-        PROFILE="bj_dx_${SLOT}"
+        PROFILE="bjdx${SLOT}"
     else
-        PROFILE="bj_yw_${SLOT}"
+        PROFILE="bjyw${SLOT}"
     fi
-else 
-  PROFILE="${ZONE}"
 fi
 
-echo "show spring.profiles.active:${PROFILE} and run app.jar"
-
-java -Dloader.path=/dependency -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=${PROFILE} -jar /app.jar 
+echo "run the ${SERVICE} at ${LOCATION}@${SLOT} ${PROFILE}"
+java -Dloader.path=/dependency -Dspring.profiles.active=${PROFILE} -jar /app.jar
