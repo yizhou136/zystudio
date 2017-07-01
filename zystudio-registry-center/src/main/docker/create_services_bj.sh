@@ -13,20 +13,28 @@ IMAGE_NAME=${IMAGE_BASE_NAME}:${SERVICE_VER}
 
 NETWORK=zystudio_common
 LOCATION=${location:-"bj"}
-SERVICE_NAME="${SERVICE_NAME}-${LOCATION}"
-
 #HOSTNAME_TEMPLATE="${ZONE}{{.Task.Slot}}.{{.Service.Name}}.zystudio.com"
 #SET_ENV="--env zone=${ZONE} --env slot=\"{{.Task.Slot}}\"
 #--env registry.peers=\"http://regcen-bjyw1:1100/eureka\"  --env registry.hostname=${NAME}"
+
+SERVICE_NAME="${SERVICE_NAME}-${LOCATION}dx01"
 echo "create ${SERVICE_NAME} service for ${IMG_PREF}"
-
-HOST_NAME="${SERVICE_NAME}-${LOCATION}{{.Task.Slot}}"
-
-SET_COMMS="--publish 1100:1100 --replicas 2 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname=${HOST_NAME} --name ${SERVICE_NAME}"
+#HOST_NAME="${SERVICE_NAME}-${LOCATION}{{.Task.Slot}}"
+HOST_NAME="{{.Task.Name}}"
+SET_COMMS="--publish 1100:1100 --replicas 1 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname=${HOST_NAME} --name ${SERVICE_NAME}"
 SET_ENV="--env service=${SERVICE_NAME} --env location=${LOCATION} --env slot={{.Task.Slot}} --env profile=${LOCATION}"
 SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint engine.labels.service.type==common"
+echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE_NAME}"
+docker network  create  -d  overlay  ${NETWORK}
+docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE_NAME}
 
 
+SERVICE_NAME="${SERVICE_NAME}-${LOCATION}yw01"
+echo "create ${SERVICE_NAME} service for ${IMG_PREF}"
+HOST_NAME="{{.Task.Name}}"
+SET_COMMS="--publish 1101:1101 --replicas 1 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname=${HOST_NAME} --name ${SERVICE_NAME}"
+SET_ENV="--env service=${SERVICE_NAME} --env location=${LOCATION} --env slot={{.Task.Slot}} --env profile=${LOCATION}"
+SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint engine.labels.service.type==common"
 echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE_NAME}"
 docker network  create  -d  overlay  ${NETWORK}
 docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE_NAME}
