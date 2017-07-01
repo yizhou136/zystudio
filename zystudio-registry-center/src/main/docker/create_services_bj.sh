@@ -32,7 +32,7 @@ docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE_NAME}
 PROFILE="${LOCATION}yw01"
 SERVICE_NAME="${ORG_SERVICE_NAME}-${PROFILE}"
 echo "create ${SERVICE_NAME} service for ${IMG_PREF}"
-SET_COMMS="--publish 1101:1101 --replicas 1 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname=${SERVICE_NAME} --name ${SERVICE_NAME}"
+SET_COMMS="--publish 1100:1100 --replicas 1 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname=${SERVICE_NAME} --name ${SERVICE_NAME}"
 SET_ENV="--env service=${SERVICE_NAME} --env location=${LOCATION} --env slot={{.Task.Slot}} --env profile=${PROFILE}"
 SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint engine.labels.service.type==common"
 echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE_NAME}"
