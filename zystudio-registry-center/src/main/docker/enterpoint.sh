@@ -11,7 +11,7 @@ if [ "${LOCATION}" = "bj" ]; then
     if [ ${SLOT} = 1 ] ; then
         PROFILE="bjdx${SLOT}"
     else
-        PROFILE="bjyw${SLOT}"
+        PROFILE="bjyw1"
     fi
 fi
 
