@@ -21,7 +21,7 @@ mvn dependency:copy-dependencies
 
 #docker rmi  ${DEP_IMAGE_NAME}
 
-docker tag $(docker build -t ${DEP_IMAGE_NAME} -f src/main/docker/DockerfileDep -q  .)  ${DEP_IMAGE_NAME}
+docker tag $(docker build -t ${DEP_IMAGE_NAME} -f src/main/docker/DockerfileDep -q  .)  ${REGISTRY}${DEP_IMAGE_NAME}
 
 
 mvn  clean -Dmaven.test.skip=true package
