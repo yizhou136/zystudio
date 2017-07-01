@@ -29,7 +29,7 @@ mvn  clean -Dmaven.test.skip=true package
 echo "make ${IMAGE_NAME} image"
 
 #docker rmi  ${IMAGE_NAME}
-docker tag $(docker build -t ${IMAGE_NAME} -f src/main/docker/Dockerfile --build-arg  FROM_DEP=${DEP_IMAGE_NAME} -q .) ${REGISTRY}${IMAGE_NAME}
+docker tag $(docker build -t ${IMAGE_NAME} -f src/main/docker/Dockerfile --build-arg  FROM_DEP=${DEP_IMAGE_NAME} -q .) ${IMAGE_NAME}
 
 #docker build -t ${IMAGE_NAME} -f src/main/docker/Dockerfile  -q .) ${IMAGE_NAME}:$(date -ju "+%Y%m%d-%H%M%S")
 
