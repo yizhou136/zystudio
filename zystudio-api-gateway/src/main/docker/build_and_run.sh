@@ -3,7 +3,7 @@
 CURPWD=`pwd`
 
 
-sh  ${CURPWD}/dockerbuild.sh
+sh  ${CURPWD}/src/main/docker/dockerbuild.sh
 
-sh  ${CURPWD}/create_services.sh
+sh  ${CURPWD}/src/main/docker/create_services.sh
 
