@@ -19,15 +19,16 @@ LOCATION=${location:-"bj"}
 #--env registry.peers=\"http://regcen-bjyw1:1100/eureka\"  --env registry.hostname=${NAME}"
 echo "create ${SERVICE_NAME} service for ${IMG_PREF}"
 
-SERVICE_NAME="${SERVICE_NAME}-${LOCATION}{{.Task.Slot}}"
+HOST_NAME="\"${SERVICE_NAME}-${LOCATION}{{.Task.Slot}}\""
 
-SET_COMMS="--publish 1100:1100 --replicas 2 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname=${SERVICE_NAME} --name ${SERVICE_NAME}"
+SET_COMMS="--publish 1100:1100 --replicas 2 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname=${HOST_NAME} --name ${SERVICE_NAME}"
 SET_ENV="--env service=${SERVICE_NAME} --env location=${LOCATION} --env slot=\"{{.Task.Slot}}\" --env profile=${LOCATION}"
 SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint engine.labels.service.type==common"
 
 
-echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE}"
-docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE}
+echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE_NAME}"
+docker network  create  -d  overlay  ${NETWORK}
+docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE_NAME}
 
 
 #PUBLISHEDIP=$(docker-machine   ip   bjcommon2)
