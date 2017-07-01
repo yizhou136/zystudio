@@ -17,4 +17,4 @@ PROFILE="$profile"
 #fi
 
 echo "run the ${SERVICE} at ${LOCATION}@${SLOT} ${PROFILE}"
-java -Dloader.path=/dependency -Dspring.profiles.active=${PROFILE} -Dregistry.peers=${PEERS} -Dregistry.hostname=${HOSTNAME} -jar /app.jar
+java -Dloader.path=/dependency -Dspring.profiles.active=${PROFILE} -Dregistry.hostname=${HOSTNAME} -jar /app.jar
