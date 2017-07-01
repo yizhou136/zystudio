@@ -34,8 +34,8 @@ docker tag $(docker build -t ${IMAGE_NAME} -f src/main/docker/Dockerfile --build
 #docker build -t ${IMAGE_NAME} -f src/main/docker/Dockerfile  -q .) ${IMAGE_NAME}:$(date -ju "+%Y%m%d-%H%M%S")
 
 
-docker push ${DEP_IMAGE_NAME}
-docker push ${IMAGE_NAME}
+docker push ${REGISTRY}${DEP_IMAGE_NAME}
+docker push ${REGISTRY}${IMAGE_NAME}
 
 
 docker rmi ${DEP_IMAGE_NAME}  ${IMAGE_NAME}

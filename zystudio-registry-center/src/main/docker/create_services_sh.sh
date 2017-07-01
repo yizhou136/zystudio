@@ -12,7 +12,7 @@ DEP_IMAGE_NAME=${IMAGE_BASE_NAME}-dep:${SERVICE_VER}
 IMAGE_NAME=${IMAGE_BASE_NAME}:${SERVICE_VER}
 
 NETWORK=zystudio_common
-LOCATION=${location:"sh1"}
+LOCATION=${location:-"sh1"}
 
 #HOSTNAME_TEMPLATE="${ZONE}{{.Task.Slot}}.{{.Service.Name}}.zystudio.com"
 #SET_ENV="--env zone=${ZONE} --env slot=\"{{.Task.Slot}}\"
