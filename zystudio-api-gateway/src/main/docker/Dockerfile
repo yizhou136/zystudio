@@ -1,6 +1,6 @@
 #FROM  registry.cn-qingdao.aliyuncs.com/zystudio/micro_services:registry_center_dep_0.0.1
 
-ARG FROM_DEP="reg.docker.zystudio.site:5000/micro_services/registry_center_dep"
+ARG FROM_DEP="reg.docker.zystudio.site:5000/micro-services/api-gateway-dep"
 FROM ${FROM_DEP}
 
 VOLUME /tmp

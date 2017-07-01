@@ -1,37 +1,26 @@
 #!/bin/bash
 
+#Docker image prefix
+REGISTRY=reg.docker.zystudio.site:5000/
+REPOSITORY=micro-services
+SERVICE_NAME=api-gateway
+SERVICE_VER=0.0.1
 
-#HOSTNAME_TEMPLATE="${ZONE}{{.Task.Slot}}.{{.Service.Name}}.zystudio.com"
-echo "create registry conter services for zystudio"
+IMG_PREF=${REGISTRY}${REPOSITORY}
+IMAGE_BASE_NAME=${IMG_PREF}/${SERVICE_NAME}
+DEP_IMAGE_NAME=${IMAGE_BASE_NAME}-dep:${SERVICE_VER}
+IMAGE_NAME=${IMAGE_BASE_NAME}:${SERVICE_VER}
 
 NETWORK=zystudio_common
-IMAGE="my.docker.registry.com:5000/zystudio/registry_center:0.0.1"
-PROJECT="regcen"
+LOCATION=${location:"bj"}
 
-SET_COMMS="--replicas 1 --network ${NETWORK} "
+#HOSTNAME_TEMPLATE="${ZONE}{{.Task.Slot}}.{{.Service.Name}}.zystudio.com"
+echo "create ${SERVICE_NAME} service for ${IMG_PREF}"
 
-
-ZONE="bjyw1"
-NAME="${PROJECT}-${ZONE}"
-#SET_ENV="--env zone=${ZONE} --env slot=\"{{.Task.Slot}}\" --env registry.peers=\"http://regcen-bjyw1:1100/eureka\"  --env registry.hostname=${NAME}"
-SET_ENV="--env zone=${ZONE} --env slot=\"{{.Task.Slot}}\" "
-SET_CONSTRAINT="--constraint engine.labels.location==${ZONE} --constraint engine.labels.type==common"
+SET_COMMS="--publish 80:80 --replicas 2 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname="{{.Task.Name}}" --name ${NAME}"
+SET_ENV="--env location=${LOCATION} --env slot=\"{{.Task.Slot}}\" "
+SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint engine.labels.service.type==common"
 
 
-echo "xxx ${SET_ENV} ${SET_CONSTRAINT}"
-docker-machine ssh manager1 docker  service  create ${SET_COMMS} --publish 1100:1100 --label service_name=${NAME} --hostname=${NAME}  ${SET_ENV} ${SET_CONSTRAINT} --name ${NAME}  ${IMAGE}
-
-ZONE="bjdx1"
-NAME="${PROJECT}-${ZONE}"
-#SET_ENV="--env zone=${ZONE} --env slot=\"{{.Task.Slot}}\" --env registry.peers=\"http://www.163.com/eureka,http://192.168.1.1/eureka\"  --env registry.hostname=${NAME}"
-SET_ENV="--env zone=${ZONE} --env slot=\"{{.Task.Slot}}\" "
-SET_CONSTRAINT="--constraint engine.labels.location==${ZONE} --constraint engine.labels.type==common"
-
-docker-machine ssh manager1 docker  service  create ${SET_COMMS}  --label service_name=${NAME} --hostname=${NAME}  ${SET_ENV} ${SET_CONSTRAINT} --name ${NAME}  ${IMAGE}
-
-
-
-PUBLISHEDIP=$(docker-machine   ip   bjcommon2)
-echo "the PUBLISHEDIP is ${PUBLISHEDIP}"
-#iptables -t nat -I PREROUTING -p tcp --dport  1100 -j DNAT --to ${PUBLISHEDIP}
-#iptables -t nat -I POSTROUTING -p tcp --dport 1100  -j MASQUERADE
+echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE}"
+docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE}
