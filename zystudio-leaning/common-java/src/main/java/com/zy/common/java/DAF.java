@@ -44,8 +44,8 @@ public class DAF {
     public static void main(String argv[]){
         DAF daf = new DAF();
         Set<String> set = new HashSet<>();
-        set.add("傻子");
-        set.add("傻小子");
+        set.add("江泽民");
+        set.add("江泽民SB");
         daf.addSenstiveWordToHashMap(set);
 
         System.out.println(daf.sensitiveWordMap);
