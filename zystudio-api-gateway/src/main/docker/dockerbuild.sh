@@ -8,7 +8,7 @@ set -e
 REGISTRY=reg.docker.zystudio.site:5000/
 REPOSITORY=micro-services
 
-IMG_PREF=${REGISTRY}${REPOSITORY}
+IMG_PREF=${REPOSITORY}
 IMG_VER=0.0.1
 IMAGE_BASE_NAME=${IMG_PREF}/api-gateway
 DEP_IMAGE_NAME=${IMAGE_BASE_NAME}-dep:${IMG_VER}
