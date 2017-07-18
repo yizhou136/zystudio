@@ -23,4 +23,4 @@ SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint en
 
 
 echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE}"
-docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE}
+docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE_NAME}
