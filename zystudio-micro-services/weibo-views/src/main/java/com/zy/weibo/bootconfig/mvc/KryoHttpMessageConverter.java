@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * @author by zy.
  */
-@Component
+//@Component
 public class KryoHttpMessageConverter extends AbstractHttpMessageConverter<Object>{
     public static final MediaType KRYO = new MediaType("application", "x-kryo");
 

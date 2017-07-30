@@ -7,13 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.stream.Stream;
 
 /**
@@ -52,6 +51,16 @@ public class ComputerController {
             method = {RequestMethod.GET, RequestMethod.POST})
     public User regUser(@RequestBody User user){
         logger.info("regUser user:{}",user);
+        user.setUid(user.getUid()+1);
+        return user;
+    }
+
+
+    @RequestMapping(value = "/regUser2",
+            method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public User regUser2(@Valid User user, BindingResult bindingResult){
+        logger.info("regUser2 user:{} bindingResult:{}",user, bindingResult);
         user.setUid(user.getUid()+1);
         return user;
     }

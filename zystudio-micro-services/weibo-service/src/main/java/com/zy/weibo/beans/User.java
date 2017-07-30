@@ -1,5 +1,6 @@
 package com.zy.weibo.beans;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -7,6 +8,7 @@ import java.io.Serializable;
  */
 public class User implements Serializable{
 
+    @NotNull
     private Long uid;
     private String name;
     private String city;
