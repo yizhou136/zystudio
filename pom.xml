@@ -125,6 +125,12 @@
                 <artifactId>spring-boot-admin-starter-client</artifactId>
                 <version>1.5.1</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.caucho/hessian -->
+            <dependency>
+                <groupId>com.caucho</groupId>
+                <artifactId>hessian</artifactId>
+                <version>4.0.38</version>
+            </dependency>
         </dependencies>
 	</dependencyManagement>
 

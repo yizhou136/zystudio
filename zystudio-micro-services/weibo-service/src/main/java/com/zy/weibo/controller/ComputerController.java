@@ -8,17 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.stream.Stream;
 
 /**
  * @author by zy.
  */
 @RestController
+@Validated
 public class ComputerController {
     private static final Logger logger = LoggerFactory.getLogger(ComputerController.class);
 
@@ -59,7 +62,7 @@ public class ComputerController {
     @RequestMapping(value = "/regUser2",
             method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public User regUser2(@Valid User user, BindingResult bindingResult){
+    public User regUser2(@Valid @NotNull User user, BindingResult bindingResult){
         logger.info("regUser2 user:{} bindingResult:{}",user, bindingResult);
         user.setUid(user.getUid()+1);
         return user;
