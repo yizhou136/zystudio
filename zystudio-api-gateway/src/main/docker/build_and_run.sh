@@ -2,6 +2,7 @@
 
 CURPWD=`pwd`
 
+git pull
 
 sh  ${CURPWD}/src/main/docker/dockerbuild.sh
 
