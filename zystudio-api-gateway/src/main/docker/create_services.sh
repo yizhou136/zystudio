@@ -17,10 +17,11 @@ LOCATION=${location:-"bj"}
 #HOSTNAME_TEMPLATE="${ZONE}{{.Task.Slot}}.{{.Service.Name}}.zystudio.com"
 echo "create ${SERVICE_NAME} service for ${IMG_PREF}"
 
-SET_COMMS="--publish 80:80 --replicas 2 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname="{{.Task.Name}}" --name ${NAME}"
-SET_ENV="--env service=${SERVICE_NAME} --env location=${LOCATION} --env slot=\"{{.Task.Slot}}\" "
+SET_COMMS="--publish 80:80 --replicas 2 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname=${SERVICE_NAME} --name ${SERVICE_NAME}"
+SET_ENV="--env service=${SERVICE_NAME} --env location=${LOCATION} --env slot={{.Task.Slot}} --env profile=${PROFILE}"
 SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint engine.labels.service.type==common"
 
 
 echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE_NAME}"
+docker network  create  -d  overlay  ${NETWORK}
 docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE_NAME}
