@@ -23,5 +23,6 @@ SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint en
 
 
 echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE_NAME}"
+docker    service  rm  ${SERVICE_NAME}
 docker network  create  -d  overlay  ${NETWORK}
 docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE_NAME}
