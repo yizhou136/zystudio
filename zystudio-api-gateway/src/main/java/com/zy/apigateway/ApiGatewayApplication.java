@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
  */
 @SpringCloudApplication
 @EnableZuulProxy
-@EnableOAuth2Sso
+//@EnableOAuth2Sso-
 public class ApiGatewayApplication {
 
     @Bean
