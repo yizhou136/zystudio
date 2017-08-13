@@ -12,7 +12,7 @@ DEP_IMAGE_NAME=${IMAGE_BASE_NAME}-dep:${SERVICE_VER}
 IMAGE_NAME=${IMAGE_BASE_NAME}:${SERVICE_VER}
 
 NETWORK=zystudio_common
-LOCATION=${location:"bj"}
+LOCATION=${location:-"bj"}
 
 #HOSTNAME_TEMPLATE="${ZONE}{{.Task.Slot}}.{{.Service.Name}}.zystudio.com"
 echo "create ${SERVICE_NAME} service for ${IMG_PREF}"
@@ -22,5 +22,5 @@ SET_ENV="--env service=${SERVICE_NAME} --env location=${LOCATION} --env slot=\"{
 SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint engine.labels.service.type==common"
 
 
-echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE}"
+echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE_NAME}"
 docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE_NAME}
