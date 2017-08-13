@@ -1,12 +1,11 @@
 #!/bin/bash
 
-CURPWD=`pwd`
-
-cd ..
-
 git pull
 
-sh  ${CURPWD}/src/main/docker/dockerbuild.sh
+PWD=`pwd`
+set -e
 
-sh  ${CURPWD}/src/main/docker/create_services.sh
+sh  zystudio-api-gateway/src/main/docker/dockerbuild.sh
+
+sh  zystudio-api-gateway/src/main/docker/create_services.sh
 
