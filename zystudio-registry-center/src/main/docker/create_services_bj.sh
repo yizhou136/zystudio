@@ -26,6 +26,7 @@ SET_ENV="--env service=${SERVICE_NAME} --env location=${LOCATION} --env slot={{.
 SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint engine.labels.service.type==common"
 echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE_NAME}"
 docker network  create  -d  overlay  ${NETWORK}
+docker    service  rm  ${SERVICE_NAME}
 docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE_NAME}
 
 
@@ -37,6 +38,7 @@ SET_ENV="--env service=${SERVICE_NAME} --env location=${LOCATION} --env slot={{.
 SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint engine.labels.service.type==common"
 echo "docker service create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT} ${IMAGE_NAME}"
 docker network  create  -d  overlay  ${NETWORK}
+docker    service  rm  ${SERVICE_NAME}
 docker  service  create ${SET_COMMS} ${SET_ENV} ${SET_CONSTRAINT}  ${IMAGE_NAME}
 
 

@@ -3,9 +3,8 @@
 git pull
 
 PWD=`pwd`
+cd zystudio-api-gateway
+
 set -e
-
-sh  zystudio-api-gateway/src/main/docker/dockerbuild.sh
-
-sh  zystudio-api-gateway/src/main/docker/create_services.sh
-
+sh  src/main/docker/dockerbuild.sh
+sh  src/main/docker/create_services.sh

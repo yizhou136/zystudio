@@ -1,14 +1,11 @@
 #!/bin/bash
 
-CURPWD=`pwd`
 
-docker    service  rm  registry-center-bjdx01
-docker    service  rm  registry-center-bjyw01
+git pull
 
-docker  rmi reg.docker.zystudio.site:5000/micro-services/registry-center:0.0.1
-docker  rmi reg.docker.zystudio.site:5000/micro-services/registry-center-dep:0.0.1
+PWD=`pwd`
+cd  zystudio-registry-center
+set -e
 
-sh  ${CURPWD}/src/main/docker/dockerbuild.sh
-
-sh  ${CURPWD}/src/main/docker/create_services_bj.sh
-
+sh  src/main/docker/dockerbuild.sh
+sh  src/main/docker/create_services_bj.sh

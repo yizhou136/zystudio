@@ -18,9 +18,9 @@ echo "make ${DEP_IMAGE_NAME} dependency image"
 
 mvn dependency:copy-dependencies
 
-
+#docker  rmi reg.docker.zystudio.site:5000/micro-services/registry-center:0.0.1
+#docker  rmi reg.docker.zystudio.site:5000/micro-services/registry-center-dep:0.0.1
 #docker rmi  ${DEP_IMAGE_NAME}
-
 docker tag $(docker build -t ${DEP_IMAGE_NAME} -f src/main/docker/DockerfileDep -q  .)  ${REGISTRY}${DEP_IMAGE_NAME}
 
 
