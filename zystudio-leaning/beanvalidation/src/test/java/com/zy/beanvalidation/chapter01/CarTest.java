@@ -2,11 +2,14 @@ package com.zy.beanvalidation.chapter01;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.math.BigDecimal;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -15,6 +18,7 @@ import static org.junit.Assert.*;
  * Created by Administrator on 2017/7/29.
  */
 public class CarTest {
+    private final static Logger logger = LoggerFactory.getLogger(CarTest.class);
     private static Validator validator;
 
     @BeforeClass
@@ -25,11 +29,25 @@ public class CarTest {
 
     @Test
     public void manufacturerIsNull() {
-        Car car = new Car( null, "DD-AB-123", 4 );
+        /*User user = new User();
+        //user.setEmail("a");
+        Set<ConstraintViolation<User>> userConstraintViolations = validator.validate(user);
+        //assertEquals(1, userConstraintViolations.size() );
 
-        car.addPart(null);
+        System.out.println(userConstraintViolations.size());
+        System.out.println(userConstraintViolations);*/
+        Car car = new Car( "BMW", "DD-AB-123", 4 );
+        car.setLicensePlate("USA-b223-aa88892323");
+        car.setPrice(new BigDecimal("2342322232.23"));
+        car.setTopSpeed(2322.2D);
+        car.setSeatCount(1);
         Set<ConstraintViolation<Car>> constraintViolations =
-                validator.validate( car );
+                validator.validate(car);
+
+        for (ConstraintViolation<Car> cv : constraintViolations) {
+            System.out.println("msg:"+cv.getMessage()+" validatedValue:"+cv.getInvalidValue()
+                    +" propertyPath:"+cv.getPropertyPath());
+        }
 
         assertEquals( 1, constraintViolations.size() );
         assertEquals(

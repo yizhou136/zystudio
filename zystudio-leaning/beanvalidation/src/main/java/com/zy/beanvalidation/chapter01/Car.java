@@ -5,10 +5,8 @@ import com.zy.beanvalidation.constraints.ValidPart;
 import com.zy.beanvalidation.constraints.ValidPassengerCount;
 
 import javax.validation.Valid;
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,25 +25,35 @@ public class Car {
     @NotNull
     private String manufacturer;
 
-    @NotNull
-    @Size(min = 2, max = 14)
+    @Size(
+        min = 2,
+        max = 14,
+        message = "The license plate '${validatedValue}' must be between {min} and {max} characters long"
+    )
     private String licensePlate;
 
-    @Min(2)
+    @Min(
+        value = 2,
+        message = "There must be at least {value} seat${value > 1 ? 's' : ''}"
+    )
     private int seatCount;
 
-    //@AssertTrue
-    private boolean isRegistered;
+    @DecimalMax(
+        value = "350",
+        message = "The top speed ${formatter.format('%1$.2f', validatedValue)} is higher " +
+                "than {value}"
+    )
+    private double topSpeed;
 
-    @Valid
-    private List<@ValidPart String> parts;
-    @Valid
-    private Map<FuelConsumption, @MaxAllowedFuelConsumption Integer> fuelConsumption;
+    @DecimalMax(value = "100000", message = "Price must not be higher than ${value}")
+    private BigDecimal price;
+
+
+
+
 
 
     public Car(){
-        this.parts = new ArrayList<>();
-        this.fuelConsumption = new HashMap<>();
     }
 
     public Car(String manufacturer) {
@@ -59,23 +67,6 @@ public class Car {
         this.seatCount = seatCount;
     }
 
-    public List<String> getParts() {
-        return parts;
-    }
-
-    public void setParts(List<String> parts) {
-        this.parts = parts;
-    }
-
-    public void setFuelConsumption(FuelConsumption consumption, int value) {
-        fuelConsumption.put(consumption, value);
-    }
-
-    public void addPart(String part){
-        parts.add(part);
-    }
-
-    //@NotNull
     public String getManufacturer() {
         return manufacturer;
     }
@@ -98,5 +89,21 @@ public class Car {
 
     public void setSeatCount(int seatCount) {
         this.seatCount = seatCount;
+    }
+
+    public double getTopSpeed() {
+        return topSpeed;
+    }
+
+    public void setTopSpeed(double topSpeed) {
+        this.topSpeed = topSpeed;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

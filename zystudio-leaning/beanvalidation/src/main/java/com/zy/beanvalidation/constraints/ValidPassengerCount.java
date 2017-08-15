@@ -33,7 +33,7 @@ public @interface ValidPassengerCount {
 
         @Override
         public boolean isValid(Car car, ConstraintValidatorContext context) {
-            return car.getSeatCount() > car.getParts().size();
+            return false;//car.getSeatCount() > car.getParts().size();
         }
     }
 }

@@ -24,6 +24,8 @@ public @interface ValidRacingCar {
     String message() default "{org.hibernate.validator.referenceguide.chapter03.validation.ValidRacingCar.message}";
     Class<?>[] groups() default { };
     Class<? extends Payload>[] payload() default { };
+
+
     class Validator implements ConstraintValidator<ValidRacingCar, Car> {
         @Override
         public void initialize(ValidRacingCar constraintAnnotation) {
