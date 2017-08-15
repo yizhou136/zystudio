@@ -3,7 +3,7 @@
 #Docker image prefix
 REGISTRY=reg.docker.zystudio.site:5000/
 REPOSITORY=micro-services
-SERVICE_NAME=zystudio-config-center
+SERVICE_NAME=config-center
 SERVICE_VER=0.0.1
 
 IMG_PREF=${REGISTRY}${REPOSITORY}
