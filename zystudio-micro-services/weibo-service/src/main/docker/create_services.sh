@@ -25,7 +25,7 @@ PROFILE="dev"
 SERVICE_NAME="${ORG_SERVICE_NAME}-${PROFILE}"
 echo "create ${SERVICE_NAME} service for ${IMG_PREF}"
 
-SET_COMMS="--publish 4000:4000 --replicas 1 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname=${SERVICE_NAME} --name ${SERVICE_NAME} --host datasource-host:${HOST_IP}"
+SET_COMMS="--publish 4100:4100 --replicas 1 --network ${NETWORK} --label service.name=${SERVICE_NAME} --hostname=${SERVICE_NAME} --name ${SERVICE_NAME} --host datasource-host:${HOST_IP}"
 SET_ENV="--env service=${SERVICE_NAME} --env location=${LOCATION} --env slot={{.Task.Slot}} --env profile=${PROFILE}"
 SET_CONSTRAINT="--constraint engine.labels.location==${LOCATION} --constraint engine.labels.service.type==common"
 
