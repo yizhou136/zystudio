@@ -14,7 +14,6 @@
 	<name>${project.artifactId}</name>
 	<description>the ${project.artifactId} of Spring Cloud project</description>
     <properties>
-        <skip_maven_deploy>true</skip_maven_deploy>
     </properties>
 
     <modules>
