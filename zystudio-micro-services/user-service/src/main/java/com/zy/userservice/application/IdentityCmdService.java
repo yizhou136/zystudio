@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
  * @author by zy.
  */
 @Service
+
 public class IdentityCmdService {
     @Autowired
     private UserRepository userRepository;
