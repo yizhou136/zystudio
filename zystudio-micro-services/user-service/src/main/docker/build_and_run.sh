@@ -2,7 +2,7 @@
 
 git pull
 
-sudo sh zystudio-commons-depend-build.sh
+sh zystudio-commons-depend-build.sh
 
 PWD=`pwd`
 cd zystudio-micro-services/user-service
