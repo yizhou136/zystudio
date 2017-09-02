@@ -2,6 +2,10 @@
 
 PWD=`pwd`
 
+cd  zystudio-commons/ddd
+mvn  install -Dmaven.test.skip=true
+cd $PWD
+
 set -e
 
 # Docker image prefix
@@ -15,7 +19,6 @@ DEP_IMAGE_NAME=${IMAGE_BASE_NAME}-dep:${IMG_VER}
 IMAGE_NAME=${IMAGE_BASE_NAME}:${IMG_VER}
 
 echo "make ${DEP_IMAGE_NAME} dependency image"
-
 mvn dependency:copy-dependencies
 
 
