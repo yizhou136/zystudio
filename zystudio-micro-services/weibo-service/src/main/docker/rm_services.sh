@@ -2,7 +2,7 @@
 #Docker image prefix
 REGISTRY=reg.docker.zystudio.site:5000/
 REPOSITORY=micro-services
-SERVICE_NAME=user-service
+SERVICE_NAME=weibo-service
 SERVICE_VER=0.0.1
 
 IMG_PREF=${REGISTRY}${REPOSITORY}

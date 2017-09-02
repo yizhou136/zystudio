@@ -11,6 +11,7 @@ IMAGE_BASE_NAME=${IMG_PREF}/${ORG_SERVICE_NAME}
 DEP_IMAGE_NAME=${IMAGE_BASE_NAME}-dep:${SERVICE_VER}
 IMAGE_NAME=${IMAGE_BASE_NAME}:${SERVICE_VER}
 
+HOST_IP=`ifconfig eth0 | grep "inet addr:" | awk '{print $2}' | cut -c 6-`
 NETWORK=zystudio_common
 LOCATION=${location:-"bj"}
 #HOSTNAME_TEMPLATE="${ZONE}{{.Task.Slot}}.{{.Service.Name}}.zystudio.com"
