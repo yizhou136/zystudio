@@ -7,6 +7,7 @@ import com.zy.userservice.application.exception.WrongPasswordException;
 import com.zy.userservice.commons.MyPreconditions;
 import com.zy.userservice.domain.cmdmodel.identity.User;
 import com.zy.userservice.domain.cmdmodel.identity.UserRepository;
+import com.zy.userservice.domain.readmodel.identity.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class IdentityCmdService {
     @Autowired
     private UserRepository userRepository;
 
-    public boolean registerUser(RegisterUserCommand command){
+    public UserDto registerUser(RegisterUserCommand command){
         User user = command.toUser();
         return user.registeUser();
     }

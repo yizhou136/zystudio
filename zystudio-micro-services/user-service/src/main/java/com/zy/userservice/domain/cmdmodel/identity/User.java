@@ -3,6 +3,7 @@ package com.zy.userservice.domain.cmdmodel.identity;
 import com.zy.ddd.domain.AbstractDomainObject;
 import com.zy.userservice.domain.cmdmodel.identity.events.AuthenticatingUserPassword;
 import com.zy.userservice.domain.cmdmodel.identity.events.RegisteringUserDomainEvent;
+import com.zy.userservice.domain.readmodel.identity.UserDto;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -72,14 +73,15 @@ public class User extends AbstractDomainObject{
     }
 
     //for business methods
-    public boolean registeUser(){
+    public UserDto registeUser(){
         Objects.requireNonNull(name, "the user name not be null");
         Objects.requireNonNull(password, "the user password not be null");
         Objects.requireNonNull(headface, "the user password not be null");
 
+        UserDto userDto = new UserDto(this);
         Optional<Boolean> optional =
                 publishEvent(RegisteringUserDomainEvent.of(this));
-        return optional.get();
+        return userDto;
     }
 
     public boolean authenticatingUserPassword(String password){

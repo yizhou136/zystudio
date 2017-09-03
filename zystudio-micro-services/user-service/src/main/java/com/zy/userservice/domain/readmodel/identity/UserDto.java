@@ -6,6 +6,7 @@ import com.zy.userservice.domain.cmdmodel.identity.User;
  * @author by zy.
  */
 public class UserDto {
+    private Long   uid;
     private String emailAddress;
     private boolean enabled;
     private String firstName;
@@ -39,6 +40,7 @@ public class UserDto {
     }
 
     private void initializeFrom(User aUser) {
+        this.uid = aUser.getUid();
         this.emailAddress = aUser.getUserDetail().getEmailAddress().address();
 
         this.firstName = aUser.getUserDetail().getFullName().getFirstName();

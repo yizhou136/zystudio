@@ -27,6 +27,8 @@ public class RegisterUserCommand {
     private String addressPostalCode;
     private String addressCountryCode;
 
+    public RegisterUserCommand(){}
+
     public RegisterUserCommand(String tenantId, String invitationIdentifier, String username, String password, String firstName,
                                String lastName, boolean enabled, Date startDate, Date endDate, String emailAddress, String primaryTelephone,
                                String secondaryTelephone, String addressStreetAddress, String addressCity, String addressStateProvince,
